@@ -24,3 +24,5 @@ ypred = system.predict(xtest)
 print(f"Accuracy : {accuracy_score(ytest, ypred)}")
 # Accuracy : 0.951048951048951 
 #          ~ 95%
+
+
