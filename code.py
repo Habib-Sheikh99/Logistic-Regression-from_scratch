@@ -12,6 +12,7 @@ class Logistic_Regression:
         self.epsilon=1e-15
         self.weights=0
         self.bias=0
+        self.plot_result=False
         self.losses=[]
 
     def sigmoid(self, x):
@@ -50,6 +51,8 @@ class Logistic_Regression:
         y_pred = self.sigmoid(processed_input)
         y_probability = [1 if i > threshold else 0 for i in y_pred]
         result = pd.Series(np.array(y_probability))
+        if self.plot_result:
+            plt.plot(y_pred, label='Predicted')
         return result
 
 
