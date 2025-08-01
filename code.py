@@ -21,18 +21,21 @@ class Logistic_Regression:
     def forward_propogation(self, X:pd.Series|pd.DataFrame):
         z = np.dot(X, self.weights) + self.bias
         A = self.sigmoid(z)
+        
         return A
       
     def compute_loss(self, y_true:pd.Series, y_pred:pd.Series):
         y1=y_true * np.log(y_pred+self.epsilon)
         y2=(1 - y_true)*np.log(1-y_pred+self.epsilon)
         loss = -np.mean(y1+y2)
+        
         return loss
       
     def fit(self, X:pd.DataFrame|pd.Series, y:pd.Series):
         n_samples, n_features=X.shape
         self.weights=np.zeros(n_features)
         self.bias=0
+                
         #Gradient Descent
         for _ in range(self.max_iter):
             A = self.forward_propogation(X)
@@ -40,19 +43,24 @@ class Logistic_Regression:
             dz=A-y
             dw = (1 / n_samples) * np.dot(X.T, dz)
             db = (1 / n_samples) * np.sum(dz)
+        
             #Update Parameteres
             self.weights-=self.learning_rate * dw
             self.bias-=self.learning_rate*db
+        
         plt.plot(self.losses)    # Visualization of the the process
       
     def predict(self, X):
         threshold = 0.50
+        
         processed_input = np.dot(X, self.weights) + self.bias
         y_pred = self.sigmoid(processed_input)
         y_probability = [1 if i > threshold else 0 for i in y_pred] # Converting answer into probability for different classes...
         result = pd.Series(np.array(y_probability))
+        
         if self.plot_result:
             plt.plot(y_pred, label='Predicted')
+        
         return result
 
 
