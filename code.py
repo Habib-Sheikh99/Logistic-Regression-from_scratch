@@ -43,13 +43,13 @@ class Logistic_Regression:
             #Update Parameteres
             self.weights-=self.learning_rate * dw
             self.bias-=self.learning_rate*db
-        plt.plot(self.losses)
+        plt.plot(self.losses)    # Visualization of the the process
       
     def predict(self, X):
         threshold = 0.50
         processed_input = np.dot(X, self.weights) + self.bias
         y_pred = self.sigmoid(processed_input)
-        y_probability = [1 if i > threshold else 0 for i in y_pred]
+        y_probability = [1 if i > threshold else 0 for i in y_pred] # Converting answer into probability for different classes...
         result = pd.Series(np.array(y_probability))
         if self.plot_result:
             plt.plot(y_pred, label='Predicted')
