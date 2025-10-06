@@ -2,7 +2,7 @@ from sklearn.datasets import load_breast_cancer
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-
+import logistic_regression
 data = load_breast_cancer()
 X = pd.DataFrame(data.data, columns=data.feature_names)
 y=pd.Series(data.target)
